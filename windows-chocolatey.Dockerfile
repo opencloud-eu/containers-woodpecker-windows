@@ -1,14 +1,14 @@
 # syntax = docker/dockerfile:1
 # escape=`
 
-ARG DOCKER_REGISTRY
-FROM ${DOCKER_REGISTRY}/woodpecker-windows-base:latest
+FROM opencloud-eu/woodpecker-windows-git:latest
 
 SHELL ["cmd", "/S", "/C"]
 
-LABEL maintainer="Geco-iT Team <contact@geco-it.fr>" `
-      name="geco-it/woodpecker-windows-base-chocolatey" `
-      vendor="Geco-iT"
+LABEL maintainer="OpenCloud.eu Team <devops@opencloud.eu>" `
+      name="opencloud-eu/woodpecker-windows-chocolatey" `
+      vendor="OpenCloud GmbH" `
+      source="https://github.com/opencloud-eu/containers-woodpecker-windows"
 
 # Install last Chocolatey (https://docs.chocolatey.org/en-us/choco/setup)
 RUN powershell -Command `
