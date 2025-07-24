@@ -89,9 +89,10 @@ $matrix = @(
 # iterate over the Dockerfile matrix
 $matrix | ForEach-Object {
     # check if imageToBuild is specified and matches the current image
-    if ($imageToBuild -and $_.name -ne $imageToBuild) {
-        continue
+    if ($PSBoundParameters.ContainsKey('imageToBuild') -and $_.name -ne $imageToBuild) {
+        return
     }
+
     $name = $_.name
     $image = $_.imagename
     $tags = $_.tags
