@@ -1,14 +1,14 @@
 # syntax = docker/dockerfile:1
 # escape=`
 
-ARG DOCKER_REGISTRY
-FROM ${DOCKER_REGISTRY}/woodpecker-windows-base-chocolatey-msvsbuild:latest
+FROM opencloud-eu/woodpecker-windows-vsbuildtools:latest
 
 ARG PYTHON_VERSION=311
 
-LABEL maintainer="Geco-iT Team <contact@geco-it.fr>" `
-      name="geco-it/woodpecker-windows-python" `
-      vendor="Geco-iT"
+LABEL maintainer="OpenCloud.eu Team <devops@opencloud.eu>" `
+      name="opencloud-eu/woodpecker-windows-python" `
+      vendor="OpenCloud GmbH" `
+      source="https://github.com/opencloud-eu/containers-woodpecker-windows"
 
 SHELL ["cmd", "/S", "/C"]
 

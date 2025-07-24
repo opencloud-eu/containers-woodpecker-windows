@@ -7,9 +7,10 @@ FROM mcr.microsoft.com/windows/servercore:ltsc2022
 ARG BUSYBOX_VERSION=busybox-w64u-FRP-5467-g9376eebd8.exe `
     BUSYBOX_VERSION_SHA256=a78891d1067c6cd36c9849754d7be0402aae1bc977758635c27911fd7c824f6b
 
-LABEL maintainer="Geco-iT Team <contact@geco-it.fr>" `
-      name="geco-it/woodpecker-windows-base" `
-      vendor="Geco-iT"
+LABEL maintainer="OpenCloud.eu Team <devops@opencloud.eu>" `
+      name="opencloud-eu/woodpecker-windows-busybox" `
+      vendor="OpenCloud GmbH" `
+      source="https://github.com/opencloud-eu/containers-woodpecker-windows"
 
 SHELL ["cmd", "/S", "/C"]
 
