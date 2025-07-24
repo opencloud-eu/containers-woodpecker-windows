@@ -29,8 +29,8 @@ $matrix = @(
         imagename = "$registrypath/woodpecker-windows-agent"
         tags      = @(
             "latest",
-            "v1.0",
-            "v1"
+            "v2.0",
+            "v2"
         )
     },
     @{
