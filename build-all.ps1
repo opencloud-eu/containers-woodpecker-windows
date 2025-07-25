@@ -19,7 +19,7 @@ $registries = @(
 )
 
 # matrix with file-names target image names and tags, increment tags as needed
-# order is importent, the images are dependent on each other
+# order is important, the images are depending on each other
 $matrix = @(
     @{
         name      = "windows-busybox"
