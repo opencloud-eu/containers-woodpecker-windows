@@ -13,15 +13,15 @@ LABEL maintainer="OpenCloud.eu Team <devops@opencloud.eu>" `
       source="https://github.com/opencloud-eu/containers-woodpecker-windows"
 
 # Install Woodpecker git-plugin
-RUN New-item -type directory C:\bin ; `
-    Invoke-WebRequest -OutFile "C:\bin\plugin-git.exe" `
+RUN powershell -Command "New-item -type directory C:\bin ; `
+    Invoke-WebRequest -OutFile C:\bin\plugin-git.exe `
      -Uri https://github.com/woodpecker-ci/plugin-git/releases/download/$env:PLUGIN_VERSION/windows-amd64_plugin-git.exe ; `
     # check digest
-    $actual=(Get-FileHash -Algorithm SHA256 "C:\bin\plugin-git.exe").Hash.ToLower(); `
-    if ($actual -ne $env:PLUGIN_VERSION_SHA256) { throw "SHA256 mismatch" } ; `
+    $actual=(Get-FileHash -Algorithm SHA256 C:\bin\plugin-git.exe).Hash.ToLower(); `
+    if ($actual -ne $env:PLUGIN_VERSION_SHA256) { throw 'SHA256 mismatch' } ; `
     # add to path for usage with custom entrypoints
     $env:PATH += ';C:\bin'; `
-    [Environment]::SetEnvironmentVariable('PATH', $env:PATH,[EnvironmentVariableTarget]::Machine)
+    [Environment]::SetEnvironmentVariable('PATH', $env:PATH,[EnvironmentVariableTarget]::Machine)"
 
 USER ContainerUser
 ENV GODEBUG=netdns=go
