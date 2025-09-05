@@ -22,11 +22,42 @@ $registries = @(
 # order is important, the images are depending on each other
 $matrix = @(
     @{
-        name      = "windows-busybox"
+        name      = "windows-chocolatey"
+        imagename = "$registrypath/woodpecker-windows-chocolatey"
+        tags      = @(
+            "latest",
+            "v2.0.0",
+            "v2.0",
+            "v2"
+        )
+    },
+    @{
+        name      = "windows-agent"
+        imagename = "$registrypath/woodpecker-windows-agent"
+        tags      = @(
+            "latest",
+            "v3.0.1",
+            "v3.0",
+            "v3"
+        )
+    },
+    @{
+        name      = "windows-git-plugin"
+        imagename = "$registrypath/woodpecker-windows-git-plugin"
+        tags      = @(
+            "latest",
+            "v2.0.0",
+            "v2.0",
+            "v2"
+        )
+    },
+    @{
+        name      = "windows-desktop-build-tools"
         imagename = "$registrypath/woodpecker-windows-busybox"
         tags      = @(
             "latest",
-            "v1.0",
+            "v1.1.0",
+            "v1.1",
             "v1"
         )
     },
@@ -35,53 +66,9 @@ $matrix = @(
         imagename = "$registrypath/woodpecker-windows-git"
         tags      = @(
             "latest",
-            "v1.0",
-            "v1"
-        )
-    },
-    @{
-        name      = "windows-agent"
-        imagename = "$registrypath/woodpecker-windows-agent"
-        tags      = @(
-            "latest",
+            "v2.0.0",
             "v2.0",
             "v2"
-        )
-    },
-    @{
-        name      = "windows-git-plugin"
-        imagename = "$registrypath/woodpecker-windows-git-plugin"
-        tags      = @(
-            "latest",
-            "v1.1",
-            "v1"
-        )
-    },
-    @{
-        name      = "windows-chocolatey"
-        imagename = "$registrypath/woodpecker-windows-chocolatey"
-        tags      = @(
-            "latest",
-            "v1.1",
-            "v1"
-        )
-    },
-    @{
-        name      = "windows-vsbuildtools"
-        imagename = "$registrypath/woodpecker-windows-vsbuildtools"
-        tags      = @(
-            "latest",
-            "v1.1",
-            "v1"
-        )
-    },
-    @{
-        name      = "windows-python"
-        imagename = "$registrypath/woodpecker-windows-python"
-        tags      = @(
-            "latest",
-            "v1.1",
-            "v1"
         )
     }
 )
