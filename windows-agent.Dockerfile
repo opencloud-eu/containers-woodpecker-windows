@@ -3,12 +3,12 @@
 
 FROM mcr.microsoft.com/windows/servercore:ltsc2022
 
-# Woodpecker Windows Agent https://github.com/woodpecker-ci/woodpecker/tags
-ARG WOODPECKER_AGENT_VERSION=v3.0.1 `
-    WOODPECKER_AGENT_VERSION_SHA256=d4ef8e2fa94281bc1e369786030fe7d5afa70fff98ec613d60e4c795bfd8ac8b
+# renovate: datasource=github-tags depName=woodpecker-ci/woodpecker
+ARG WOODPECKER_AGENT_VERSION=v3.0.1
+ARG WOODPECKER_AGENT_VERSION_SHA256=d4ef8e2fa94281bc1e369786030fe7d5afa70fff98ec613d60e4c795bfd8ac8b
 
 LABEL maintainer="OpenCloud.eu Team <devops@opencloud.eu>" `
-      name="opencloud-eu/woodpecker-windows-agent" `
+      name="opencloudeu/woodpecker-windows-agent" `
       vendor="OpenCloud GmbH" `
       source="https://github.com/opencloud-eu/containers-woodpecker-windows"
 
