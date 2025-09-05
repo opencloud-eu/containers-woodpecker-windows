@@ -19,7 +19,6 @@ Released under GPLv3+
 
 ## Author Information
 
-This Windows port was originally created in 2024 by Cyril DUCHENOY, CEO of [Geco-iT SARL](https://www.geco-it.fr).\
-Origin Repository: https://github.com/GECO-IT/woodpecker-windows
+This Windows port was [originally](https://github.com/GECO-IT/woodpecker-windows) created in 2024 by Cyril DUCHENOY, CEO of [Geco-iT SARL](https://www.geco-it.fr).
 
 It has been heavily modified/rewritten by @flimmy for usage at opencloud.eu
