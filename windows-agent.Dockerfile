@@ -1,16 +1,11 @@
 # syntax = docker/dockerfile:1
 # escape=`
 
-FROM mcr.microsoft.com/windows/servercore:ltsc2022
+FROM mcr.microsoft.com/windows/servercore:ltsc2022 as download
 
 # renovate: datasource=github-tags depName=woodpecker-ci/woodpecker
-ARG WOODPECKER_AGENT_VERSION=v3.0.1
-ARG WOODPECKER_AGENT_VERSION_SHA256=d4ef8e2fa94281bc1e369786030fe7d5afa70fff98ec613d60e4c795bfd8ac8b
-
-LABEL maintainer="OpenCloud.eu Team <devops@opencloud.eu>" `
-      name="opencloudeu/woodpecker-windows-agent" `
-      vendor="OpenCloud GmbH" `
-      source="https://github.com/opencloud-eu/containers-woodpecker-windows"
+ARG WOODPECKER_AGENT_VERSION=v3.9.0
+ARG WOODPECKER_AGENT_VERSION_SHA256=173deab1382b689334296e882e210854c189afa3ab86132460a28a8e0e6d0949
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
@@ -24,9 +19,21 @@ RUN mkdir C:\etc\ssl\certs, C:\etc\woodpecker; `
     if ($actual -ne $env:WOODPECKER_AGENT_VERSION_SHA256) { throw "SHA256 mismatch" } ; `
     Remove-Item "woodpecker-agent.zip"
 
-# Internal setting do NOT change! Signals that woodpecker is running inside a container
-ENV GODEBUG=netdns=go `
-    WOODPECKER_IN_CONTAINER=true
+
+FROM mcr.microsoft.com/windows/nanoserver:ltsc2022
+
+LABEL maintainer="OpenCloud.eu Team <devops@opencloud.eu>" `
+      name="opencloudeu/woodpecker-windows-agent" `
+      vendor="OpenCloud GmbH" `
+      source="https://github.com/opencloud-eu/containers-woodpecker-windows"
+
+USER ContainerAdministrator
+
+COPY --from=download C:\bin\woodpecker-agent.exe C:\bin\woodpecker-agent.exe
+
+RUN mkdir C:\etc\ssl\certs, C:\etc\woodpecker;
+
+ENV WOODPECKER_IN_CONTAINER=true
 
 EXPOSE 3000
 
