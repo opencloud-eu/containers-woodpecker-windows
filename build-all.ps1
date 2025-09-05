@@ -53,7 +53,7 @@ $matrix = @(
     },
     @{
         name      = "windows-desktop-build-tools"
-        imagename = "$registrypath/woodpecker-windows-busybox"
+        imagename = "$registrypath/woodpecker-windows-desktop-build-tools"
         tags      = @(
             "latest",
             "v1.1.0",
