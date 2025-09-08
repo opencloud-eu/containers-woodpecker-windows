@@ -2,11 +2,14 @@
 
 These are the Dockerfiles for windows-containers used by our ci.
 
+
 ## container hierarchie
 
 ```txt
+mcr.microsoft.com/windows/nanoserver:ltsc2022
+└── opencloudeu/woodpecker-windows-agent
+
 mcr.microsoft.com/windows/servercore:ltsc2022
-├── opencloudeu/woodpecker-windows-agent
 ├── opencloudeu/woodpecker-windows-git-plugin
 └── opencloudeu/woodpecker-windows-chocolatey
     ├──opencloudeu/woodpecker-windows-desktop-build-tools
@@ -16,6 +19,7 @@ mcr.microsoft.com/windows/servercore:ltsc2022
 ## License
 
 Released under GPLv3+
+
 
 ## Author Information
 
