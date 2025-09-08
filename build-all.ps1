@@ -1,12 +1,13 @@
 Param(
     [Parameter(
         Position=0,
-        Mandatory=$false
+        Mandatory=$False
     )][string]$imageToBuild,
     [Parameter(
         Mandatory=$False
     )][switch]$buildonly
 )
+
 
 ### VARS
 # team/user name for the registry used to tag the images
@@ -19,59 +20,63 @@ $registries = @(
 )
 
 # matrix with file-names target image names and tags, increment tags as needed
-# order is important, the images are depending on each other
+# the chocolatey image should go first, as it is our base image
 $matrix = @(
     @{
         name      = "windows-chocolatey"
         imagename = "$registrypath/woodpecker-windows-chocolatey"
-        tags      = @(
-            "latest",
-            "v2.0.0",
-            "v2.0",
-            "v2"
-        )
+        version   = "v2"
     },
     @{
+        # renovate: datasource=github-tags depName=woodpecker-ci/woodpecker
         name      = "windows-agent"
         imagename = "$registrypath/woodpecker-windows-agent"
-        tags      = @(
-            "latest",
-            "v3.0.1",
-            "v3.0",
-            "v3"
-        )
+        version   = "v3.9"
     },
     @{
         name      = "windows-git-plugin"
         imagename = "$registrypath/woodpecker-windows-git-plugin"
-        tags      = @(
-            "latest",
-            "v2.0.0",
-            "v2.0",
-            "v2"
-        )
+        version   = "v2.1"
     },
     @{
         name      = "windows-desktop-build-tools"
         imagename = "$registrypath/woodpecker-windows-desktop-build-tools"
-        tags      = @(
-            "latest",
-            "v1.1.0",
-            "v1.1",
-            "v1"
-        )
+        version   = "v1.1"
     },
     @{
         name      = "windows-git"
         imagename = "$registrypath/woodpecker-windows-git"
-        tags      = @(
-            "latest",
-            "v2.0.0",
-            "v2.0",
-            "v2"
-        )
+        version   = "v2"
     }
 )
+
+
+### Functions
+
+# Generate a list of semantic version tags based on the provided version parts
+# to ensure that a version tag is added for its major, minor, and patch part.
+# If only one part is given the rest is padded with zeros to ensure all three parts are present.
+function Get-SemVerTags {
+    param([string]$version)
+    $ver = $version.TrimStart("v")
+    $parts = $ver -split '\.'
+    
+    # Pad missing parts with zeros to ensure 3 parts
+    while ($parts.Length -lt 3) { $parts += '0' }
+    $major = $parts[0]
+    $minor = $parts[1]
+    $patch = $parts[2]
+    $tags = @(
+        "latest",
+        "v$major.$minor.$patch",
+        "v$major.$minor",
+        "v$major"
+    )
+    return $tags
+}
+
+
+### Main
 
 # iterate over the Dockerfile matrix
 $matrix | ForEach-Object {
@@ -82,7 +87,7 @@ $matrix | ForEach-Object {
 
     $name = $_.name
     $image = $_.imagename
-    $tags = $_.tags
+    $tags = Get-SemVerTags $_.version
     $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
     
     # build image with name and latest-tag
@@ -118,7 +123,7 @@ if (-not $buildonly) {
                 continue
             }
             $image = $_.imagename
-            $tags = $_.tags
+            $tags = Get-SemVerTags $_.version
             $tags | ForEach-Object {
                 $tag = $_
                 $tagged = "$image" + ":" + "$tag"

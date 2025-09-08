@@ -1,6 +1,8 @@
 # syntax = docker/dockerfile:1
 # escape=`
 
+# Use multi-stage builds to keep the final image small
+# First stage: download and verify the Woodpecker agent binary
 FROM mcr.microsoft.com/windows/servercore:ltsc2022 as download
 
 # renovate: datasource=github-tags depName=woodpecker-ci/woodpecker
@@ -16,10 +18,10 @@ RUN mkdir C:\etc\ssl\certs, C:\etc\woodpecker; `
     Invoke-WebRequest -Uri "https://github.com/woodpecker-ci/woodpecker/releases/download/$env:WOODPECKER_AGENT_VERSION/woodpecker-agent_windows_amd64.zip" -OutFile "woodpecker-agent.zip" ; `
     Expand-Archive -Path "woodpecker-agent.zip" -DestinationPath "C:\bin" ; `
     $actual = (Get-FileHash -Algorithm SHA256 "woodpecker-agent.zip").Hash.ToLower(); `
-    if ($actual -ne $env:WOODPECKER_AGENT_VERSION_SHA256) { throw "SHA256 mismatch" } ; `
-    Remove-Item "woodpecker-agent.zip"
+    if ($actual -ne $env:WOODPECKER_AGENT_VERSION_SHA256) { throw "SHA256 mismatch" }
 
 
+# Second stage: create the final lightweight image
 FROM mcr.microsoft.com/windows/nanoserver:ltsc2022
 
 LABEL maintainer="OpenCloud.eu Team <devops@opencloud.eu>" `
