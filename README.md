@@ -3,7 +3,7 @@
 These are the Dockerfiles for windows-containers used by our ci.
 
 
-## container hierarchie
+## container hierarchy
 
 ```txt
 mcr.microsoft.com/windows/nanoserver:ltsc2022
