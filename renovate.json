@@ -1,6 +1,19 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    "config:base"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^windows-agent.Dockerfile$/",
+        "/^build-all.ps1$/"
+      ],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\nARG WOODPECKER_AGENT_VERSION=(?<currentValue>.*)\\nWOODPECKER_AGENT_VERSION_SHA256=(?<currentDigest>.*)",
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\n\\w*name\\w*= \"windows-agent\"\\n\\w*imagename\\w*= \"$registrypath/woodpecker-windows-agent\"\\n\\w*version\\w*= \"(?<currentValue>.*)\""
+      ]
+    }
   ]
 }
