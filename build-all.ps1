@@ -41,7 +41,7 @@ $matrix = @(
     @{
         name      = "windows-desktop-build-tools"
         imagename = "$registrypath/woodpecker-windows-desktop-build-tools"
-        version   = "v1.1"
+        version   = "v2.0"
     },
     @{
         name      = "windows-git"
