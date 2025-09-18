@@ -15,6 +15,8 @@ LABEL maintainer="OpenCloud.eu Team <devops@opencloud.eu>" `
 RUN `
     # Install git with chocolatey
     C:\\ProgramData\\chocolatey\\bin\\choco.exe install -y git `
+    && Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1 `
+    && refreshenv `
     # cleanup
     && Remove-Item @( `
      'C:\tmp\cache', `
