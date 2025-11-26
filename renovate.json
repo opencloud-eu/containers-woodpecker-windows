@@ -12,7 +12,7 @@
         "/^build-all\\.ps1$/"
       ],
       "matchStrings": [
-        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\s+ARG WOODPECKER_AGENT_VERSION=(?<currentValue>\\S+)\\s+ARG WOODPECKER_AGENT_VERSION_SHA256=(?<currentDigest>\\S+)",
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\s+ARG WOODPECKER_AGENT_VERSION=(?<currentValue>\\S+)",
         "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\s+name\\s*=\\s*\"windows-agent\"\\s+imagename\\s*=\\s*\"[^\"]+\"\\s+version\\s*=\\s*\"(?<currentValue>[^\"]+)\""
       ]
     }
