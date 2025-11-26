@@ -31,7 +31,7 @@ $matrix = @(
         # renovate: datasource=github-tags depName=woodpecker-ci/woodpecker
         name      = "windows-agent"
         imagename = "$registrypath/woodpecker-windows-agent"
-        version   = "v3.9"
+        version   = "v3.12.0"
     },
     @{
         name      = "windows-git-plugin"
