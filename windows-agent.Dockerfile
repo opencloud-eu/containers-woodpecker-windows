@@ -6,7 +6,7 @@
 FROM mcr.microsoft.com/windows/servercore:ltsc2022 as download
 
 # renovate: datasource=github-tags depName=woodpecker-ci/woodpecker
-ARG WOODPECKER_AGENT_VERSION=v3.14.0
+ARG WOODPECKER_AGENT_VERSION=v3.18.1
 #ARG WOODPECKER_AGENT_VERSION_SHA256=
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
